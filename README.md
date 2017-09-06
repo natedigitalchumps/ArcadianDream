@@ -10,3 +10,9 @@ DIRECTORY GUIDE:
 
 *BUILD* - This is for final builds.
 
+====
+
+Notes:
+
+Use Unity to when importing final assets into Unity project.  This helps Unity to keep track of assets.
+
