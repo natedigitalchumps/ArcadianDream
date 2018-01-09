@@ -16,3 +16,6 @@ Notes:
 
 Use Unity to when importing final assets into Unity project.  This helps Unity to keep track of assets.
 
+Scale for Models and Unity is 1 to 1 Meter
+
+
