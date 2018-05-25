@@ -6,6 +6,7 @@ public class ClawMovement : MonoBehaviour {
 
     Vector2 startPos;
     float ParentSize;
+    public float speed = 2;
     private void Awake()
     {
         startPos.x = transform.localPosition.x;
@@ -23,8 +24,17 @@ public class ClawMovement : MonoBehaviour {
 	void Update () {
 
         float hor;
-        float ver;
+        float front;
 
+        hor = Input.GetAxis("Horizontal");
+        front = Input.GetAxis("Vertical");
 
+        if((transform.localPosition.x>=startPos.x) && (transform.localPosition.z>=startPos.y))
+        {
+            transform.Translate( -transform.right * hor * Time.deltaTime);
+            print(hor);
+            transform.Translate(transform.forward * front * Time.deltaTime);
+            print(front);
+        }
 	}
 }
