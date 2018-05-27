@@ -652,9 +652,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 1c1c20f3-8e50-4462-ae8a-58bbbeb20c70
-  projectName: ArcadianV4 (1)
-  organizationId: stanley-rosenbaum
+  cloudProjectId: 9d945605-ab9d-41e6-92d7-b4a711f3ac88
+  projectName: arcade
+  organizationId: leonard-wedderburn
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
