@@ -4,24 +4,13 @@ using UnityEngine;
 
 public class ClawMovement : MonoBehaviour {
 
-    Vector2 startPos;
-    float ParentSize;
+   
     public float speed = 2;
-    private void Awake()
-    {
-        startPos.x = transform.localPosition.x;
-        startPos.y = transform.localPosition.z;
+    public GrabberControl grabber;
 
-        ParentSize = transform.parent.localScale.x;
-    }
-
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+ 
+    // Update is called once per frame
+    void FixedUpdate () {
 
         float hor;
         float front;
@@ -29,12 +18,10 @@ public class ClawMovement : MonoBehaviour {
         hor = Input.GetAxis("Horizontal");
         front = Input.GetAxis("Vertical");
 
-        if((transform.localPosition.x>=startPos.x) && (transform.localPosition.z>=startPos.y))
-        {
-            transform.Translate( -transform.right * hor * Time.deltaTime);
-            print(hor);
-            transform.Translate(transform.forward * front * Time.deltaTime);
-            print(front);
-        }
-	}
+       // hor = Mathf.Round(hor);
+       // front = Mathf.Round(front);
+ 
+        transform.Translate(transform.right * hor * (speed * Time.deltaTime));
+        transform.Translate(transform.forward * front * (speed * Time.deltaTime));
+    }
 }
