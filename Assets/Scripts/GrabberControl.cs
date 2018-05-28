@@ -14,8 +14,8 @@ public class GrabberControl : MonoBehaviour {
     float Grabvalue;
     public float GrabValueLimit = .6f;
     GameObject GrabbedOjbect;
-
-
+    //
+    float speed = 2f;
     //rigid body
     public Rigidbody rbody;
     //come back up
@@ -86,11 +86,13 @@ public class GrabberControl : MonoBehaviour {
 
         if (doUP)
         {
-           
+
+            float step = speed * Time.deltaTime;
             float dis = Vector3.Distance(transform.position, point.position);
-            if(dis<.001)
+            print(dis);
+            if(dis>.001f)
             {
-                transform.position = Vector3.MoveTowards(transform.position, point.position, 0);
+                transform.position = Vector3.MoveTowards(transform.position, point.position, step);
             }else
             {
                 doUP = false;

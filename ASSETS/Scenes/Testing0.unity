@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44585466, g: 0.49558616, b: 0.57434845, a: 1}
+  m_IndirectSpecularColor: {r: 0.4458539, g: 0.49558556, b: 0.5743474, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -700,7 +700,7 @@ GameObject:
   - component: {fileID: 1177924997}
   - component: {fileID: 1177924996}
   - component: {fileID: 1177925000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: claw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -717,8 +717,8 @@ Transform:
   m_LocalPosition: {x: 0.008298, y: 0.009224, z: 0.010117}
   m_LocalScale: {x: 0.0014007583, y: 0.0014007563, z: 0.0014007575}
   m_Children:
-  - {fileID: 1711149615}
   - {fileID: 1867045608}
+  - {fileID: 1711149615}
   m_Father: {fileID: 1309185238}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: -270, y: 0, z: 0}
@@ -779,8 +779,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 0.23564379, z: 1}
+  m_Center: {x: -7.440229e-15, y: -0.07574672, z: 0.000000018059394}
 --- !u!33 &1177924999
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1125,11 +1125,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1711149614}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.818, z: 0}
+  m_LocalPosition: {x: 0, y: -0.839, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1177924995}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1753458181
 GameObject:
@@ -1227,7 +1227,7 @@ GameObject:
   - component: {fileID: 1867045611}
   - component: {fileID: 1867045610}
   - component: {fileID: 1867045609}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: faller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1240,12 +1240,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1867045607}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.799, z: 0}
-  m_LocalScale: {x: 0.4130811, y: 0.4130811, z: 0.4130811}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.83900046, z: 0}
+  m_LocalScale: {x: 0.41308218, y: 0.4130815, z: 0.41308218}
   m_Children: []
   m_Father: {fileID: 1177924995}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1867045609
 MonoBehaviour:
@@ -1260,7 +1260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CraneLocation: 0
   clawGrabState: 0
-  GrabValueLimit: 0.6
+  GrabValueLimit: 0.7
   rbody: {fileID: 0}
   point: {fileID: 1711149615}
 --- !u!54 &1867045610
@@ -1276,7 +1276,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!23 &1867045611
 MeshRenderer:
