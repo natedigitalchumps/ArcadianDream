@@ -16,45 +16,48 @@ public class GrabberControl : MonoBehaviour {
     GameObject GrabbedOjbect;
     //
     float speed = 2f;
-    //rigid body
-    public Rigidbody rbody;
+
+    //go down
+    bool doDown = false;
     //come back up
     bool doUP = false;
-    //final point
+    //top location
     public Transform point;
-    
-    private void OnCollisionEnter(Collision col)
+    public LayerMask lmask;
+    private void OnTriggerEnter(Collider col)
     {
-        if (col.collider.name == "floor" || col.collider.tag == "toy")
+        if(GrabbedOjbect == null)
         {
-            CraneLocation = CraneState.Floor;
-
-        }
-
-        if (col.collider.tag == "toy" && clawGrabState == grabstate.empty)
-        {
-            Grabvalue = Random.value;
-            print(Grabvalue);
-            if (Grabvalue > GrabValueLimit && clawGrabState == grabstate.empty)
+  
+            if (col.tag == "toy" && clawGrabState == grabstate.empty)
             {
-                clawGrabState = grabstate.full;
-                GrabbedOjbect = col.gameObject;
-                GrabbedOjbect.transform.parent = transform;
-                Rigidbody ToyRBody = GrabbedOjbect.GetComponent<Rigidbody>();
-                ToyRBody.isKinematic = true;
-                rbody.isKinematic = true;
+                Grabvalue = Random.value;
+                print(Grabvalue);
+                if (Grabvalue > GrabValueLimit && clawGrabState == grabstate.empty)
+                {
+                    clawGrabState = grabstate.full;
+                    GrabbedOjbect = col.gameObject;
+                    GrabbedOjbect.transform.parent = transform;
+                   
+                    Rigidbody ToyRBody = GrabbedOjbect.GetComponent<Rigidbody>();
+                    ToyRBody.useGravity = false;
+                    
+                }
             }
         }
+
+    
 
 
     }
 
-
-    private void Awake()
-    {
  
-        rbody = GetComponent<Rigidbody>();
-  
+
+    IEnumerator smallwait()
+    {
+
+        yield return new WaitForSeconds(.5f);
+        GrabbedOjbect = null;
     }
 
     private void Update()
@@ -63,33 +66,67 @@ public class GrabberControl : MonoBehaviour {
 
         if (Input.GetMouseButtonDown(0) && clawGrabState == grabstate.full)
         {
+           
+            Rigidbody Toyrbody = GrabbedOjbect.GetComponent<Rigidbody>();
+            Toyrbody.useGravity = true;
+           
             GrabbedOjbect.transform.parent = null;
-            Rigidbody rbody = GrabbedOjbect.GetComponent<Rigidbody>();
-            rbody.isKinematic = false;
             clawGrabState = grabstate.empty;
+            StartCoroutine(smallwait());
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Space) && CraneLocation == CraneState.Top)
+        switch (CraneLocation)
         {
-
-            rbody.useGravity = true;
-            CraneLocation = CraneState.Moving;
+            case CraneState.Top:
+                if(Input.GetKeyDown(KeyCode.Space) && clawGrabState == grabstate.empty)
+                {
+                    CraneLocation = CraneState.Moving;
+                    doDown = true;
+                }
+                break;
+            case CraneState.Floor:
+                if(Input.GetKeyDown(KeyCode.Space))
+                {
+                  
+                    CraneLocation = CraneState.Moving;
+                    doUP = true;
+                }
+                break;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && CraneLocation == CraneState.Floor)
+        if(doDown)
         {
-            rbody.useGravity = false;
-            CraneLocation = CraneState.Moving;
-            doUP = true;
+            RaycastHit hit;
+            Vector3 hitpoint;
+            if(Physics.Raycast(point.position,point.transform.up,out hit,Mathf.Infinity,lmask))
+            {
+                hitpoint = hit.point;
+                print(hit.transform.name);
+                float step = speed * Time.deltaTime;
+                float dis = Vector3.Distance(transform.position, hitpoint);
+
+                if (dis > .001f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, hitpoint, step);
+                }
+                else
+                {
+                    doDown = false;
+                    CraneLocation = CraneState.Floor;
+                }
+            }
+
+   
         }
+
 
         if (doUP)
         {
 
             float step = speed * Time.deltaTime;
             float dis = Vector3.Distance(transform.position, point.position);
-            print(dis);
+           
             if(dis>.001f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, point.position, step);
