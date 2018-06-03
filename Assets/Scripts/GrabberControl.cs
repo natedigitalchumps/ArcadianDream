@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GrabberControl : MonoBehaviour {
-
+    public Transform ClawCenter;
     public enum CraneState { Top, Moving, Floor };
     public CraneState CraneLocation;
 
@@ -13,42 +13,46 @@ public class GrabberControl : MonoBehaviour {
     //grabbing a object
     float Grabvalue;
     public float GrabValueLimit = .6f;
-    GameObject GrabbedOjbect;
+    public GameObject GrabbedOjbect;
     //
     float speed = 2f;
 
     //go down
-    bool doDown = false;
+  public  bool doDown = false;
     //come back up
-    bool doUP = false;
+   public bool doUP = false;
     //top location
     public Transform point;
     public LayerMask lmask;
-    private void OnTriggerEnter(Collider col)
+
+    private void Awake()
+    {
+        ClawCenter = transform.GetChild(0).transform;
+    }
+
+    public void ClawEnter(GameObject obj)
     {
         if(GrabbedOjbect == null)
         {
   
-            if (col.tag == "toy" && clawGrabState == grabstate.empty)
+            if (obj.transform.tag == "toy" && clawGrabState == grabstate.empty)
             {
                 Grabvalue = Random.value;
                 print(Grabvalue);
                 if (Grabvalue > GrabValueLimit && clawGrabState == grabstate.empty)
                 {
-                    clawGrabState = grabstate.full;
-                    GrabbedOjbect = col.gameObject;
+                    GrabbedOjbect = obj;
+                    GrabbedOjbect.transform.position = ClawCenter.position;
                     GrabbedOjbect.transform.parent = transform;
+                    
                    
                     Rigidbody ToyRBody = GrabbedOjbect.GetComponent<Rigidbody>();
                     ToyRBody.useGravity = false;
                     
+                    clawGrabState = grabstate.full;
                 }
             }
         }
-
-    
-
-
     }
 
  
@@ -90,7 +94,7 @@ public class GrabberControl : MonoBehaviour {
                 {
                   
                     CraneLocation = CraneState.Moving;
-                    doUP = true;
+                  doUP = true;
                 }
                 break;
         }
@@ -98,26 +102,35 @@ public class GrabberControl : MonoBehaviour {
         if(doDown)
         {
             RaycastHit hit;
-            Vector3 hitpoint;
+          
             if(Physics.Raycast(point.position,point.transform.up,out hit,Mathf.Infinity,lmask))
             {
-                hitpoint = hit.point;
-                print(hit.transform.name);
+                
+              //  print(hit.point);
                 float step = speed * Time.deltaTime;
-                float dis = Vector3.Distance(transform.position, hitpoint);
-
-                if (dis > .001f)
+                float dis;
+                if(hit.transform.tag == "toy")
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, hitpoint, step);
+                     dis = Vector3.Distance(ClawCenter.position, hit.transform.position);
+                }
+                else 
+                {
+                    dis = Vector3.Distance(ClawCenter.position, hit.point);
+                }
+
+                if (dis > .03f)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, hit.point, step);
+                    print(dis);
                 }
                 else
                 {
+                  
                     doDown = false;
                     CraneLocation = CraneState.Floor;
                 }
-            }
 
-   
+            }   
         }
 
 
@@ -126,8 +139,10 @@ public class GrabberControl : MonoBehaviour {
 
             float step = speed * Time.deltaTime;
             float dis = Vector3.Distance(transform.position, point.position);
-           
-            if(dis>.001f)
+
+ 
+       
+            if(dis>0)
             {
                 transform.position = Vector3.MoveTowards(transform.position, point.position, step);
             }else
