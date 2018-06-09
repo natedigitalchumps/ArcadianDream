@@ -18,13 +18,13 @@ public class GrabberControl : MonoBehaviour {
     float speed = 2f;
 
     //go down
-  public  bool doDown = false;
+    bool doDown = false;
     //come back up
-   public bool doUP = false;
+     bool doUP = false;
     //top location
     public Transform point;
     public LayerMask lmask;
-
+    public bool inToy = false;
     private void Awake()
     {
         ClawCenter = transform.GetChild(0).transform;
@@ -38,7 +38,7 @@ public class GrabberControl : MonoBehaviour {
             if (obj.transform.tag == "toy" && clawGrabState == grabstate.empty)
             {
                 Grabvalue = Random.value;
-                print(Grabvalue);
+                //print(Grabvalue);
                 if (Grabvalue > GrabValueLimit && clawGrabState == grabstate.empty)
                 {
                     GrabbedOjbect = obj;
@@ -102,33 +102,41 @@ public class GrabberControl : MonoBehaviour {
         if(doDown)
         {
             RaycastHit hit;
-          
-            if(Physics.Raycast(point.position,point.transform.up,out hit,Mathf.Infinity,lmask))
-            {
-                
-              //  print(hit.point);
-                float step = speed * Time.deltaTime;
-                float dis;
-                if(hit.transform.tag == "toy")
-                {
-                     dis = Vector3.Distance(ClawCenter.position, hit.transform.position);
-                }
-                else 
-                {
-                    dis = Vector3.Distance(ClawCenter.position, hit.point);
-                }
 
-                if (dis > .03f)
+            if (Physics.Raycast(point.position, point.transform.up, out hit, Mathf.Infinity, lmask))
+            {
+                float step = Time.deltaTime * speed;
+
+                if(hit.transform.tag == "area")
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, hit.point, step);
-                    print(dis);
+                    float dis = Vector3.Distance(transform.position, hit.point);
+
+                    if(dis>.01f)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, hit.point, step);
+                    }
+                    else
+                    {
+
+                        doDown = false;
+                        CraneLocation = CraneState.Floor;
+                    }
                 }
                 else
                 {
-                  
-                    doDown = false;
-                    CraneLocation = CraneState.Floor;
+                    if (!inToy)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, hit.point, step);
+                    }
+                    else
+                    {
+
+                        doDown = false;
+                        CraneLocation = CraneState.Floor;
+                    }
                 }
+
+
 
             }   
         }
@@ -140,7 +148,8 @@ public class GrabberControl : MonoBehaviour {
             float step = speed * Time.deltaTime;
             float dis = Vector3.Distance(transform.position, point.position);
 
- 
+            inToy = false;
+
        
             if(dis>0)
             {
