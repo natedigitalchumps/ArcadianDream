@@ -9,6 +9,9 @@ using UnityEngine;
 //
 public class GameManager : MonoBehaviour {
 
+    public enum BuildPlatform {UnityEditor,Android};
+    public BuildPlatform buildplatform;
+
 	public static GameManager instance = null; // Singleton Instance
 
 	// Manages the Singleton Instance.
@@ -20,12 +23,18 @@ public class GameManager : MonoBehaviour {
 
             Destroy(gameObject);
 		}
-	}
+
+#if UNITY_EDITOR
+        buildplatform = BuildPlatform.UnityEditor;
+#elif UNITY_ANDROID
+    buildplatform = BuildPlatform.Android;
+#endif
+    }
 
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
  
 	}
 	

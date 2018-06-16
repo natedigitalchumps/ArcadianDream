@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClawMovement : MonoBehaviour {
 
@@ -17,18 +18,25 @@ public class ClawMovement : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate () {
 
-        float hor;
-        float front;
+        if(GameManager.instance.buildplatform == GameManager.BuildPlatform.UnityEditor)
+        {
+            float hor;
+            float front;
 
-        hor = Input.GetAxis("Horizontal");
-        front = Input.GetAxis("Vertical");
+            hor = Input.GetAxis("Horizontal");
+            front = Input.GetAxis("Vertical");
 
-        // hor = Mathf.Round(hor);
-        // front = Mathf.Round(front);
-        
-        rbody.velocity = transform.forward * front * (speed * Time.deltaTime) + transform.right * hor * (speed * Time.deltaTime);
+            rbody.velocity = transform.forward * front * (speed * Time.deltaTime) + transform.right * hor * (speed * Time.deltaTime);
 
-        //transform.Translate(transform.right * hor * (speed * Time.deltaTime));
-       // transform.Translate(transform.forward * front * (speed * Time.deltaTime));
+        }else if(GameManager.instance.buildplatform == GameManager.BuildPlatform.Android)
+        {
+            VRController.instance.CraneMovement(rbody, speed,transform);
+        }
+        else
+        {
+            VRController.instance.quicktext.text = "not sure";
+        }
+
+
     }
 }
