@@ -1459,7 +1459,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1753458182
 Transform:
   m_ObjectHideFlags: 0
@@ -1591,8 +1591,6 @@ MonoBehaviour:
   clawGrabState: 0
   GrabValueLimit: 0.6
   GrabbedOjbect: {fileID: 0}
-  doDown: 0
-  doUP: 0
   point: {fileID: 1711149615}
   lmask:
     serializedVersion: 2

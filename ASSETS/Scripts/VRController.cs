@@ -21,7 +21,7 @@ public class VRController : MonoBehaviour {
         {
             
             touchpoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, controller);
-            quicktext.text = "Touch: " + touchpoint;      
+            
         }
         else
         {
