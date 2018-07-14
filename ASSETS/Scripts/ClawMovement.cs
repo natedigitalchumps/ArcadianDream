@@ -7,9 +7,9 @@ public class ClawMovement : MonoBehaviour {
 
    
     public float speed = 2;
-    public GrabberControl grabber;
+    public Transform floatTarget;
     Rigidbody rbody;
-
+    public LayerMask lmask;
     private void Awake()
     {
         rbody = GetComponent<Rigidbody>();
@@ -26,7 +26,7 @@ public class ClawMovement : MonoBehaviour {
             hor = Input.GetAxis("Horizontal");
             front = Input.GetAxis("Vertical");
 
-            rbody.velocity = transform.forward * front * (speed * Time.deltaTime) + transform.right * hor * (speed * Time.deltaTime);
+            rbody.velocity = -transform.forward * front * (speed * Time.deltaTime) + -transform.right * hor * (speed * Time.deltaTime);
 
         }else if(GameManager.instance.buildplatform == GameManager.BuildPlatform.Android)
         {
@@ -38,5 +38,16 @@ public class ClawMovement : MonoBehaviour {
         }
 
 
+    }
+
+    private void Update()
+    {
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position,-transform.up,out hit,Mathf.Infinity,lmask))
+        {
+            Vector3 vec3 = hit.point;
+            vec3.y += .02f;
+            floatTarget.position = vec3;
+        } 
     }
 }

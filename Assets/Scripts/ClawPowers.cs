@@ -5,17 +5,19 @@ using UnityEngine;
 public class ClawPowers : MonoBehaviour {
 
    public GrabberControl grabberRef;
-    // Use this for initialization
+
+
     private void Awake()
     {
         grabberRef = transform.parent.GetComponent<GrabberControl>();
         
     }
 
- 
+
     private void OnTriggerEnter(Collider col)
     {
         grabberRef.ClawEnter(col.gameObject);
+       
     }
     
 }

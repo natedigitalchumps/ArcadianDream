@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ToyClawInteraction : MonoBehaviour {
 
-    
+    public Rigidbody rbody;
+    public bool captured = false;
 
     protected virtual void InClaw(GameObject obj)
     {
