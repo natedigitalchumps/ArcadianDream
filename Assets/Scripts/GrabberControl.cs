@@ -79,7 +79,7 @@ public class GrabberControl : MonoBehaviour {
            // StartCoroutine(smallwait());
         }
 
-        QuickDebug();
+       
     }
 
 

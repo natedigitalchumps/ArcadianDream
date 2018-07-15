@@ -9,7 +9,7 @@ public class VRController : MonoBehaviour {
    public OVRInput.Controller controller;
     public Text quicktext;
     Vector2 touchpoint;
-    bool TriggerPush;
+    bool TriggerPush = false;
     bool TouchPush =false;
     void Awake()
     {
@@ -27,13 +27,13 @@ public class VRController : MonoBehaviour {
             touchpoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, controller);
 
             TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
-            TouchPush = OVRInput.GetDown(OVRInput.Button.One);
-        }
-        else
-        {
-            quicktext.text = "nothing here";
+            TouchPush = OVRInput.Get(OVRInput.Button.PrimaryTouchpad);
         }
 
+        if (TriggerPush)
+            quicktext.text = "b: " + TriggerPush;
+        else
+            quicktext.text = "no";
         TriggerPull();
         TouchPress();
     }
@@ -48,7 +48,8 @@ public class VRController : MonoBehaviour {
     {
         if(TriggerPush)
         {
-            GrabberControl.instance.VRCraneLocation(TriggerPush);
+            GrabberControl.instance.LetGoFull();
+
         }
     }
 
@@ -56,7 +57,8 @@ public class VRController : MonoBehaviour {
     {
         if (TouchPush)
         {
-            GrabberControl.instance.LetGoFull();
+            GrabberControl.instance.VRCraneLocation(TouchPush);
+           
         }
     }
 }
