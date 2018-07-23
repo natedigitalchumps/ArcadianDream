@@ -16,8 +16,12 @@ public class ClawPowers : MonoBehaviour {
 
     private void OnTriggerEnter(Collider col)
     {
-        grabberRef.ClawEnter(col.gameObject);
+      //  grabberRef.ClawEnter(col.gameObject);
        
     }
-    
+
+    private void Update()
+    {
+        
+    }
 }

@@ -9,15 +9,37 @@ ModelImporter:
     400000: //RootNode
     2100000: areamat0
     2100002: areaholemat
+    2100004: backglasswallmat
+    2100006: glasswallmat
     2300000: //RootNode
     3300000: //RootNode
     4300000: clawingarea
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: areaholemat
+    second: {instanceID: 0}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: areamat0
+    second: {instanceID: 0}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: backglasswallmat
+    second: {instanceID: 0}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glasswallmat
+    second: {instanceID: 0}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0

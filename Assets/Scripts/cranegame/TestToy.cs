@@ -11,24 +11,28 @@ public class TestToy : ToyClawInteraction {
     protected override void InClaw(GameObject obj)
     {
         base.InClaw(obj);
-        obj.GetComponent<ClawPowers>().grabberRef.inToy = true;
-        captured = true;
+        GrabberControl.instance.ClawEnter(gameObject, this, rbody);
     }
 
     protected override void OnTriggerEnter(Collider col)
     {
         base.OnTriggerEnter(col);
-      
+        print("in the toy");
     }
 
     protected override void OnTriggerExit(Collider col)
     {
         base.OnTriggerExit(col);
-        rbody.constraints = RigidbodyConstraints.None;
+        
     }
 
     protected override void OutClaw()
     {
         base.OutClaw();
+    }
+
+    private void Update()
+    {
+        
     }
 }

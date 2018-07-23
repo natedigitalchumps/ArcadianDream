@@ -7,6 +7,8 @@ TagManager:
   - toy
   - area
   - claw
+  - fakeUI
+  - game
   layers:
   - Default
   - TransparentFX

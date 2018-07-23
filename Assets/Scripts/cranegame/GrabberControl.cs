@@ -32,12 +32,14 @@ public class GrabberControl : MonoBehaviour {
         ClawCenter = transform.GetChild(0).transform;
     }
 
-    public void ClawEnter(GameObject obj)
+    public void ClawEnter(GameObject obj, ToyClawInteraction toy,Rigidbody rbody)
     {
+        inToy = true;
+        print("claw enter script works");
         if(GrabbedOjbect == null)
         {
   
-            if (obj.transform.tag == "toy" && clawGrabState == grabstate.empty)
+            if (obj.CompareTag("toy") && clawGrabState == grabstate.empty)
             {
                 Grabvalue = Random.value;
                 //print(Grabvalue);
@@ -48,9 +50,9 @@ public class GrabberControl : MonoBehaviour {
                     GrabbedOjbect.transform.parent = transform;
                     
                    
-                    Rigidbody ToyRBody = GrabbedOjbect.GetComponent<Rigidbody>();
-                    ToyRBody.useGravity = false;
-                    
+                    rbody = GrabbedOjbect.GetComponent<Rigidbody>();
+                    rbody.isKinematic = true;
+                    toy.captured = true;
                     clawGrabState = grabstate.full;
                 }
             }
@@ -72,11 +74,11 @@ public class GrabberControl : MonoBehaviour {
       if(clawGrabState == grabstate.full)
         {
             Rigidbody Toyrbody = GrabbedOjbect.GetComponent<Rigidbody>();
-            Toyrbody.useGravity = true;
-
+         
+            Toyrbody.isKinematic = false;
             GrabbedOjbect.transform.parent = null;
             clawGrabState = grabstate.empty;
-           // StartCoroutine(smallwait());
+            GrabbedOjbect = null;
         }
 
        
@@ -181,7 +183,7 @@ public class GrabberControl : MonoBehaviour {
         {
             float step = Time.deltaTime * speed;
 
-            if (hit.transform.tag == "area")
+            if (hit.transform.CompareTag("area"))
             {
                 float dis = Vector3.Distance(transform.position, hit.point);
 
