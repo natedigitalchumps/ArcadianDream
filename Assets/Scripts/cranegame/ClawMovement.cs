@@ -43,11 +43,15 @@ public class ClawMovement : MonoBehaviour {
     private void Update()
     {
         RaycastHit hit;
-        if(Physics.Raycast(transform.position,-transform.up,out hit,Mathf.Infinity,lmask))
+        if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity, lmask))
         {
+            floatTarget.gameObject.SetActive(true);
             Vector3 vec3 = hit.point;
             vec3.y += .02f;
             floatTarget.position = vec3;
-        } 
+        } else
+        {
+            floatTarget.gameObject.SetActive(false);
+        }
     }
 }

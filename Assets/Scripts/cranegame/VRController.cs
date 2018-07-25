@@ -27,7 +27,7 @@ public class VRController : MonoBehaviour {
             touchpoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, controller);
 
             TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
-            TouchPush = OVRInput.Get(OVRInput.Button.PrimaryTouchpad);
+            TouchPush = OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad);
         }
 
         if (TriggerPush)
