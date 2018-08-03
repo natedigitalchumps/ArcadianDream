@@ -27,15 +27,22 @@ public class VRController : MonoBehaviour {
             touchpoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, controller);
 
             TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
-            TouchPush = OVRInput.GetDown(OVRInput.Button.PrimaryTouchpad);
+            TouchPush = OVRInput.Get(OVRInput.Button.PrimaryTouchpad);
+
+            if (TouchPush)
+            {
+                quicktext.text = "TP Yes";
+                TouchPress(TouchPush);
+
+            }
+            else
+                quicktext.text = "TP no";
+            TriggerPull();
+            
+
         }
 
-        if (TriggerPush)
-            quicktext.text = "b: " + TriggerPush;
-        else
-            quicktext.text = "no";
-        TriggerPull();
-        TouchPress();
+
     }
 
     public void CraneMovement(Rigidbody rbody, float speed,Transform crane)
@@ -53,11 +60,11 @@ public class VRController : MonoBehaviour {
         }
     }
 
-    void TouchPress()
+    void TouchPress(bool push)
     {
-        if (TouchPush)
+        if (push)
         {
-            GrabberControl.instance.VRCraneLocation(TouchPush);
+            GrabberControl.instance.VRCraneLocation(push);
            
         }
     }
