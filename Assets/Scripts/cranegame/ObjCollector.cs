@@ -20,7 +20,7 @@ public class ObjCollector : MonoBehaviour {
         if(col.tag == "toy" && interact.captured)
         {
             Destroy(col.gameObject);
-            GamePlayManager.instance.score++;
+            GamePlayManager.instance.IncreaseScore();
         }
     }
 }

@@ -10,9 +10,12 @@ public class ClawMovement : MonoBehaviour {
     public Transform floatTarget;
     Rigidbody rbody;
     public LayerMask lmask;
+    public static ClawMovement clawmove;
+    public bool AboveHole = false;
     private void Awake()
     {
         rbody = GetComponent<Rigidbody>();
+        clawmove = this;
     }
 
     // Update is called once per frame
@@ -45,12 +48,14 @@ public class ClawMovement : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity, lmask))
         {
+            AboveHole = false;
             floatTarget.gameObject.SetActive(true);
             Vector3 vec3 = hit.point;
             vec3.y += .02f;
             floatTarget.position = vec3;
         } else
         {
+            AboveHole = true;
             floatTarget.gameObject.SetActive(false);
         }
     }

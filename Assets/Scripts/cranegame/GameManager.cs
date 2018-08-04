@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
     public BuildPlatform buildplatform;
 
 	public static GameManager instance = null; // Singleton Instance
+    public float rotatespeed = 1.5f;
 
 	// Manages the Singleton Instance.
 	void Awake()
@@ -40,6 +41,6 @@ public class GameManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+        RenderSettings.skybox.SetFloat("_Rotation", rotatespeed * Time.time);
 	}
 }

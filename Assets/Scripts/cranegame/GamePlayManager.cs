@@ -19,14 +19,51 @@ public class GamePlayManager : MonoBehaviour {
 
     IEnumerator Countdown()
     {
+        
+        while(timer>=0)
 
-        yield return new WaitForEndOfFrame();
+        {
+ 
+
+            if(timer>=110)
+            {
+                TimerText.text = "1:" + (timer - 100);
+                timer--;
+            }else if(timer<=109 && timer>=101)
+            {
+                TimerText.text = "1:0" + (timer - 100);
+                timer--;
+            }
+            else if(timer==100)
+            {
+                TimerText.text = "1:00";
+                timer = 59;
+            }
+            else if(timer<10)
+            {
+                TimerText.text = ":0" + timer;
+                timer--;
+            }
+
+            else
+            {
+                TimerText.text = ":" + timer;
+                timer--;
+                
+            }
+            
+
+            yield return new WaitForSeconds(1);
+        }
+        
 
     }
 
     private void Awake()
     {
+        TimerText.text = "1:30";
         instance = this;
+        GameTimer();
     }
 
     // Use this for initialization
@@ -38,4 +75,10 @@ public class GamePlayManager : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    public void IncreaseScore()
+    {
+        score++;
+      ScoreText.text = score.ToString();
+    }
 }

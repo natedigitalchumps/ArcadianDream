@@ -28,20 +28,17 @@ public class VRController : MonoBehaviour {
 
             TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
             TouchPush = OVRInput.Get(OVRInput.Button.PrimaryTouchpad);
-
-            if (TouchPush)
-            {
-                quicktext.text = "TP Yes";
-                TouchPress(TouchPush);
-
-            }
-            else
-                quicktext.text = "TP no";
-            TriggerPull();
-            
-
         }
 
+        if (TriggerPush)
+        {
+            quicktext.text = "TP Yes";
+            TouchPress(TriggerPush);
+
+        }
+        else
+            quicktext.text = "TP no";
+        TriggerPull();
 
     }
 

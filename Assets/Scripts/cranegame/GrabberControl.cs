@@ -71,7 +71,7 @@ public class GrabberControl : MonoBehaviour {
 
     public void LetGoFull()
     {
-      if(clawGrabState == grabstate.full)
+      if(clawGrabState == grabstate.full && ClawMovement.clawmove.AboveHole)
         {
             Rigidbody Toyrbody = GrabbedOjbect.GetComponent<Rigidbody>();
          
@@ -139,14 +139,14 @@ public class GrabberControl : MonoBehaviour {
         switch (CraneLocation)
         {
             case CraneState.Top:
-                if ( trig && clawGrabState == grabstate.empty)
+                if ( trig && clawGrabState == grabstate.empty && !ClawMovement.clawmove.AboveHole)
                 {
                     CraneLocation = CraneState.Moving;
                     doDown = true;
                 }
                 break;
             case CraneState.Floor:
-                if (trig)
+                if (trig && !ClawMovement.clawmove.AboveHole)
                 {
 
                     CraneLocation = CraneState.Moving;
