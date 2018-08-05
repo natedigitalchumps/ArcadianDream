@@ -8,13 +8,16 @@ public class MainManager : MonoBehaviour {
 
     public List<GameObject> Faces1 = new List<GameObject>();
     public List<GameObject> Faces2 = new List<GameObject>();
+    public List<GameObject> Names = new List<GameObject>();
+
     public GameObject gamegroup;
+    public GameObject FaceGroup1;
 
     public OVRInput.Controller controller;
     public Transform head;
     public static MainManager MainMan;
 
-    public enum GameState {start,play,end};
+    public enum GameState {name,start,play,end};
     public GameState gamestate;
 
     private void Awake()
@@ -34,11 +37,17 @@ public class MainManager : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-
+        if(PlayerPrefs.GetString("state","play") == GameState.play.ToString())
+        {
+            for(int i=0;i<Names.Count;i++)
+            {
+                Names[i].SetActive(false);
+            }
+        }
     }
 
     // Update is called once per frame
-    void FixedUpdate() {
+    void Update() {
         OVRInput.Update();
         RaycastHit hit;
         if(Physics.Raycast(head.position,head.forward,out hit,Mathf.Infinity))
@@ -56,7 +65,7 @@ public class MainManager : MonoBehaviour {
 
     }
 
-  public  void NextAction()
+  public void NextAction()
     {
         switch(gamestate)
         {
@@ -66,6 +75,14 @@ public class MainManager : MonoBehaviour {
             case GameState.end:
                 StartCoroutine(TurnOnFaces());
                 break;
+            case GameState.start:
+                FaceGroup1.SetActive(true);
+                for (int i = 0; i < Names.Count; i++)
+                {
+                    Names[i].SetActive(false);
+                }
+                break;
+
         }
     }
 
@@ -97,9 +114,11 @@ public class MainManager : MonoBehaviour {
         if (SceneChoice == 60)
         {
             // game 1
+            PlayerPrefs.SetString("state", GameState.play.ToString());
 
         } else if(SceneChoice == 70)
         {
+            PlayerPrefs.SetString("state", GameState.play.ToString());
             //game2
             SceneManager.LoadScene(1);
         }
@@ -111,7 +130,7 @@ public class MainManager : MonoBehaviour {
 
     public void PCTesting(RaycastHit rhit)
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0))
         {
             if (rhit.transform.CompareTag("fakeUI") || rhit.transform.CompareTag("game"))
             {
@@ -119,6 +138,12 @@ public class MainManager : MonoBehaviour {
                 interact.ClickedOn();
             }
         }
+    }
+
+    public void OnApplicationQuit()
+    {
+        gamestate = GameState.name;
+        PlayerPrefs.SetString("state", gamestate.ToString());
     }
 
 

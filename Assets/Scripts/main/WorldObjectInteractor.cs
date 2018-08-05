@@ -13,6 +13,7 @@ public class WorldObjectInteractor : MonoBehaviour {
 	void Start () {
 		if(gameObject.CompareTag("game"))
         {
+
             group = 3;
         }
 	}
@@ -40,6 +41,14 @@ public class WorldObjectInteractor : MonoBehaviour {
 
             case 3:
                 MainManager.MainMan.GameSceneStarter(label);
+                break;
+            case 0:
+                NameChooser.instance.LetterChanger(label);
+
+                break;
+            case -1:
+                  MainManager.MainMan.gamestate = MainManager.GameState.start;
+                  MainManager.MainMan.NextAction();
                 break;
 
 

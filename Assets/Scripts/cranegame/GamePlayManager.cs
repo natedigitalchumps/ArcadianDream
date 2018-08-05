@@ -23,8 +23,6 @@ public class GamePlayManager : MonoBehaviour {
         while(timer>=0)
 
         {
- 
-
             if(timer>=110)
             {
                 TimerText.text = "1:" + (timer - 100);
