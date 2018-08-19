@@ -31,12 +31,12 @@ public class WorldObjectInteractor : MonoBehaviour {
         {
             case 1:
                 MainManager.MainMan.gamestate = MainManager.GameState.play;
-                MainManager.MainMan.NextAction();
+                MainManager.MainMan.NextAction(label);
                 break;
 
             case 2:
                 MainManager.MainMan.gamestate = MainManager.GameState.end;
-                MainManager.MainMan.NextAction();
+                MainManager.MainMan.NextAction(label);
                 break;
 
             case 3:
@@ -47,8 +47,13 @@ public class WorldObjectInteractor : MonoBehaviour {
 
                 break;
             case -1:
+                NameChooser.instance.NameSet();
                   MainManager.MainMan.gamestate = MainManager.GameState.start;
-                  MainManager.MainMan.NextAction();
+                  MainManager.MainMan.NextAction(0);
+                break;
+            case 4:
+                MainManager.MainMan.AboutToEndGame(label);
+                print("clickedon");
                 break;
 
 

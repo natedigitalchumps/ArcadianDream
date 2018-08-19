@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class GamePlayManager : MonoBehaviour {
 
@@ -72,6 +74,11 @@ public class GamePlayManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
+        if(Input.GetMouseButtonDown(1))
+        {
+            SceneManager.LoadScene(0);
+        }
+
 	}
 
     public void IncreaseScore()

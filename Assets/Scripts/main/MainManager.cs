@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Oculus.Platform;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour {
 
@@ -13,6 +14,10 @@ public class MainManager : MonoBehaviour {
     public GameObject gamegroup;
     public GameObject FaceGroup1;
 
+    public int UseCount = -1;
+    public string tempTextName;
+    public int tempFace1;
+    public int tempFace2;
     public OVRInput.Controller controller;
     public Transform head;
     public static MainManager MainMan;
@@ -22,6 +27,32 @@ public class MainManager : MonoBehaviour {
 
     private void Awake()
     {
+
+        if (PlayerPrefs.GetString("state", "play") == GameState.play.ToString())
+        {
+            gamestate = GameState.play;
+
+            for (int i = 0; i < Names.Count; i++)
+            {
+                Names[i].SetActive(false);
+            }
+            NextAction(PlayerPrefs.GetInt("tempnum1"));
+        }
+
+        if (!PlayerPrefs.HasKey("usecount"))
+        {
+            UseCount = 0;
+        }else
+        {
+            UseCount = PlayerPrefs.GetInt("usecount");
+            tempTextName = PlayerPrefs.GetString("tempName", "");
+            tempFace1 = PlayerPrefs.GetInt("tempnum1");
+            
+        }
+        //debug
+        print(UseCount);
+        //debug
+
         MainMan = this;
 
         for(int i=0;i<Faces1.Count;i++)
@@ -29,21 +60,15 @@ public class MainManager : MonoBehaviour {
             WorldObjectInteractor inter = Faces1[i].GetComponent<WorldObjectInteractor>();
             inter.group = 1;
             inter = Faces2[i].GetComponent<WorldObjectInteractor>();
-            inter.group = 2;
+            inter.group = 4;
 
         }
-     //   DontDestroyOnLoad(this.gameObject);
+    
     }
 
     // Use this for initialization
     void Start() {
-        if(PlayerPrefs.GetString("state","play") == GameState.play.ToString())
-        {
-            for(int i=0;i<Names.Count;i++)
-            {
-                Names[i].SetActive(false);
-            }
-        }
+
     }
 
     // Update is called once per frame
@@ -65,11 +90,14 @@ public class MainManager : MonoBehaviour {
 
     }
 
-  public void NextAction()
+  public void NextAction(int intValue)
     {
         switch(gamestate)
         {
             case GameState.play:
+                tempFace1 = intValue;
+                print("going to playerprefs "+ tempFace1);
+                PlayerPrefs.SetInt("tempnum1",tempFace1);
                 StartCoroutine(TurnOffFaces());
                 break;
             case GameState.end:
@@ -103,7 +131,7 @@ public class MainManager : MonoBehaviour {
         gamegroup.SetActive(false);
         for (int i = 0; i < Faces2.Count; i++)
         {
-            Faces2[i].gameObject.SetActive(false);
+            Faces2[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(.3f);
 
         }
@@ -122,7 +150,8 @@ public class MainManager : MonoBehaviour {
             //game2
             SceneManager.LoadScene(1);
         }
-
+        PlayerPrefs.SetString("tempName", tempTextName);
+        PlayerPrefs.SetInt("usecount", UseCount);
     }
 
     
@@ -144,7 +173,17 @@ public class MainManager : MonoBehaviour {
     {
         gamestate = GameState.name;
         PlayerPrefs.SetString("state", gamestate.ToString());
+        UseCount++;
+        PlayerPrefs.SetInt("usecount", UseCount);
     }
 
+    public void AboutToEndGame(int ChosenFace)
+    {
+        tempFace2 = ChosenFace;
+        print(tempFace1);
+        print(tempFace2);
+        PlayerPrefs.SetString("User" + UseCount, tempTextName + tempFace1.ToString() + tempFace2.ToString());
+        print(PlayerPrefs.GetString("User" + UseCount));
+    }
 
 }

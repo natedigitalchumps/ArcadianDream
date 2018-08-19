@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Oculus.Platform;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class VRController : MonoBehaviour {
     public static VRController instance;
@@ -11,6 +12,7 @@ public class VRController : MonoBehaviour {
     Vector2 touchpoint;
     bool TriggerPush = false;
     bool TouchPush =false;
+    bool BackButton = false;
     void Awake()
     {
         instance = this;
@@ -25,19 +27,26 @@ public class VRController : MonoBehaviour {
         if (OVRInput.IsControllerConnected(controller))
         {
             touchpoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, controller);
-
+            BackButton = OVRInput.Get(OVRInput.Button.Back);
             TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
             TouchPush = OVRInput.Get(OVRInput.Button.PrimaryTouchpad);
         }
 
         if (TriggerPush)
         {
-            quicktext.text = "TP Yes";
+          //  quicktext.text = "TP Yes";
             TouchPress(TriggerPush);
 
         }
         else
-            quicktext.text = "TP no";
+        {
+
+        }
+        if(BackButton)
+        {
+
+        }
+
         TriggerPull();
 
     }

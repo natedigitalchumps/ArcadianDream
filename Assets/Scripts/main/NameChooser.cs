@@ -92,4 +92,9 @@ public class NameChooser : MonoBehaviour {
         }
     }
 
+    public void NameSet()
+    {
+        MainManager.MainMan.tempTextName = first.text+last.text;
+    }
+
 }
