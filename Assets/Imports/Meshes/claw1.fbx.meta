@@ -8,6 +8,8 @@ ModelImporter:
     100000: //RootNode
     400000: //RootNode
     2100000: hoverclawmat0
+    2100002: clawtop
+    2100004: clawsdownmat
     2300000: //RootNode
     3300000: //RootNode
     4300000: hoverclaw
@@ -16,7 +18,7 @@ ModelImporter:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
