@@ -55,8 +55,9 @@ public class GamePlayManager : MonoBehaviour {
 
             yield return new WaitForSeconds(1);
         }
-        
 
+        yield return new WaitForSeconds(2f);
+        GotoMainScene();
     }
 
     private void Awake()
@@ -76,7 +77,7 @@ public class GamePlayManager : MonoBehaviour {
 		
         if(Input.GetMouseButtonDown(1))
         {
-            SceneManager.LoadScene(0);
+            GotoMainScene(); 
         }
 
 	}
@@ -85,5 +86,10 @@ public class GamePlayManager : MonoBehaviour {
     {
         score++;
       ScoreText.text = score.ToString();
+    }
+
+    public void GotoMainScene()
+    {
+        SceneManager.LoadScene(0);
     }
 }

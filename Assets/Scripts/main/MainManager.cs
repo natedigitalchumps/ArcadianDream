@@ -87,6 +87,8 @@ public class MainManager : MonoBehaviour {
 
     void VRController()
     {
+        bool TriggerPush;
+        TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
 
     }
 
