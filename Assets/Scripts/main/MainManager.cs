@@ -77,7 +77,7 @@ public class MainManager : MonoBehaviour {
         RaycastHit hit;
         if(Physics.Raycast(head.position,head.forward,out hit,Mathf.Infinity))
         {
-            VRController();
+            VRController(hit);
             PCTesting(hit);
         }
 
@@ -85,10 +85,20 @@ public class MainManager : MonoBehaviour {
 
     }
 
-    void VRController()
+    void VRController(RaycastHit rhit)
     {
         bool TriggerPush;
         TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+
+        if(TriggerPush)
+        {
+            if (rhit.transform.CompareTag("fakeUI") || rhit.transform.CompareTag("game"))
+            {
+                WorldObjectInteractor interact = rhit.transform.GetComponent<WorldObjectInteractor>();
+                interact.ClickedOn();
+            }
+
+        }
 
     }
 
