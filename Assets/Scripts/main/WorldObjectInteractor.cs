@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class WorldObjectInteractor : MonoBehaviour {
 
+    AudioSource asource;
+    public AudioClip aclip;
     public string ObjName;
     public int label;
     public int group = 0;
@@ -23,9 +25,23 @@ public class WorldObjectInteractor : MonoBehaviour {
 		
 	}
 
+    void AudioClicker()
+    {
+        asource.clip = aclip;
+        asource.playOnAwake = false;
+        asource.loop = false;
+        asource.volume = .4f;
+        asource.Play();
+    }
+
    public void ClickedOn()
     {
-        
+        if(asource== null)
+        {
+            asource = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
+        }
+
+        AudioClicker();
 
         switch (group)
         {
@@ -55,15 +71,17 @@ public class WorldObjectInteractor : MonoBehaviour {
                 MainManager.MainMan.AboutToEndGame(label);
                 print("clickedon");
                 break;
-
-
         }
 
-  
-
+      //  StartCoroutine(AudioRemover());
         
-        
+    }
 
+    IEnumerator AudioRemover()
+    {
+        yield return new WaitForSeconds(.4f);
+        asource = null;
+        Destroy(gameObject.GetComponent("AudioSource"));
     }
 
 }

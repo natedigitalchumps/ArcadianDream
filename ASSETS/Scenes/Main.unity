@@ -212,6 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: game1
   label: 60
   group: 0
@@ -518,6 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: 
   label: 102
   group: 0
@@ -627,6 +629,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -757,6 +764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: 
   label: 100
   group: 0
@@ -880,6 +888,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -1140,6 +1153,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -1296,6 +1314,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: 
   label: 0
   group: -1
@@ -1395,6 +1414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: 
   label: 0
   group: 2
@@ -1577,6 +1597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: 
   label: 103
   group: 0
@@ -1695,6 +1716,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -1787,6 +1813,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -2231,6 +2262,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -2485,6 +2521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: game2
   label: 70
   group: 0
@@ -2562,6 +2599,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -2832,6 +2874,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -2998,6 +3045,11 @@ Prefab:
       propertyPath: m_LocalScale.z
       value: 1.5
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -3085,6 +3137,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114237107276423254, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77,
+        type: 2}
+      propertyPath: aclip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1a5cd282aad8bae4aa36e11e8c7bcf77, type: 2}
   m_IsPrefabParent: 0
@@ -3153,6 +3210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79dc53a74dd729948ae42d43b0fb5397, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aclip: {fileID: 8300000, guid: 6ec74c22a9aa809428c66f2bea6d6530, type: 3}
   ObjName: 
   label: 101
   group: 0

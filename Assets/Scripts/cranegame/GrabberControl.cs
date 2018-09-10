@@ -98,11 +98,11 @@ public class GrabberControl : MonoBehaviour {
 
     private void Update()
     {
-      
-            if (Input.GetMouseButtonDown(0))
-            {
-                LetGoFull();
-            }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            LetGoFull();
+        }
 
         if (doDown)
         {
