@@ -21,7 +21,7 @@ public class MainManager : MonoBehaviour {
     public OVRInput.Controller controller;
     public Transform head;
     public static MainManager MainMan;
-
+    bool TriggerPush;
     public enum GameState {name,start,play,end};
     public GameState gamestate;
 
@@ -75,7 +75,8 @@ public class MainManager : MonoBehaviour {
     void Update() {
         OVRInput.Update();
         RaycastHit hit;
-        if(Physics.Raycast(head.position,head.forward,out hit,Mathf.Infinity))
+        TriggerPush = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger);
+        if (Physics.Raycast(head.position,head.forward,out hit,Mathf.Infinity))
         {
             VRController(hit);
             PCTesting(hit);
@@ -87,8 +88,7 @@ public class MainManager : MonoBehaviour {
 
     void VRController(RaycastHit rhit)
     {
-        bool TriggerPush;
-        TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
+        
 
         if(TriggerPush)
         {
