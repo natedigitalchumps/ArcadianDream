@@ -12,11 +12,28 @@ public class ClawMovement : MonoBehaviour {
     public LayerMask lmask;
     public static ClawMovement clawmove;
     public bool AboveHole = false;
+
+    //simple line
+    public Transform clawpoint;
+    public Transform ceilingpoint;
+    public GameObject ropeObj;
+
+
     private void Awake()
     {
         rbody = GetComponent<Rigidbody>();
         clawmove = this;
     }
+
+    void ShortRope()
+    {
+        ceilingpoint.position = new Vector3(clawpoint.position.x, ceilingpoint.position.y, clawpoint.position.z);
+        ropeObj.transform.position = (clawpoint.position + ceilingpoint.position) / 2;
+        Vector3 scale = ropeObj.transform.localScale;
+        scale.y = (ceilingpoint.position.y - clawpoint.position.y) / 2;
+        ropeObj.transform.localScale = scale;
+    }
+
 
     // Update is called once per frame
     void FixedUpdate () {
@@ -45,6 +62,8 @@ public class ClawMovement : MonoBehaviour {
 
     private void Update()
     {
+        ShortRope();
+
         RaycastHit hit;
         if (Physics.Raycast(transform.position, -transform.up, out hit, Mathf.Infinity, lmask))
         {
