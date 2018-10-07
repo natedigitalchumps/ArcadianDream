@@ -4,20 +4,25 @@ using UnityEngine;
 using Oculus.Platform;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class MainManager : MonoBehaviour {
 
     public List<GameObject> Faces1 = new List<GameObject>();
     public List<GameObject> Faces2 = new List<GameObject>();
     public List<GameObject> Names = new List<GameObject>();
+    //
+    public string InfoFileSave;
+
+    bool inputActive = true;
 
     public GameObject gamegroup;
     public GameObject FaceGroup1;
 
     public int UseCount = -1;
     public string tempTextName;
-    public int tempFace1;
-    public int tempFace2;
+    public int tempFace1=0;
+    public int tempFace2=0;
     public OVRInput.Controller controller;
     public Transform head;
     public static MainManager MainMan;
@@ -27,31 +32,33 @@ public class MainManager : MonoBehaviour {
 
     private void Awake()
     {
-
-        if (PlayerPrefs.GetString("state", "play") == GameState.play.ToString())
+        InfoFileSave = "PlayData.txt";
+     //   
+        if (!PlayerPrefs.HasKey("usecount"))
         {
+            UseCount = 0;
+        }
+        tempFace1 = PlayerPrefs.GetInt("tempnum1");
+        
+        if (tempFace1 ==0)
+        {
+            PlayerPrefs.SetInt("tempnum1", 0);
+            gamestate = GameState.name;
+        }
+       // if (PlayerPrefs.GetString("state", "play") == GameState.play.ToString())
+       else
+        {
+            SceneFader.instance.FadeChoice();
+            UseCount = PlayerPrefs.GetInt("usecount");
+            tempTextName = PlayerPrefs.GetString("tempName", "");
             gamestate = GameState.play;
 
             for (int i = 0; i < Names.Count; i++)
             {
                 Names[i].SetActive(false);
             }
-            NextAction(PlayerPrefs.GetInt("tempnum1"));
-        }
-
-        if (!PlayerPrefs.HasKey("usecount"))
-        {
-            UseCount = 0;
-        }else
-        {
-            UseCount = PlayerPrefs.GetInt("usecount");
-            tempTextName = PlayerPrefs.GetString("tempName", "");
-            tempFace1 = PlayerPrefs.GetInt("tempnum1");
-            
-        }
-        //debug
-        print(UseCount);
-        //debug
+            NextAction(tempFace1);
+        } 
 
         MainMan = this;
 
@@ -67,9 +74,7 @@ public class MainManager : MonoBehaviour {
     }
 
     // Use this for initialization
-    void Start() {
 
-    }
 
     // Update is called once per frame
     void Update() {
@@ -78,8 +83,11 @@ public class MainManager : MonoBehaviour {
         TriggerPush = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger);
         if (Physics.Raycast(head.position,head.forward,out hit,Mathf.Infinity))
         {
-            VRController(hit);
+            if(inputActive)
+                VRController(hit);
+#if UNITY_EDITOR
             PCTesting(hit);
+#endif
         }
 
         
@@ -131,7 +139,7 @@ public class MainManager : MonoBehaviour {
         for(int i=0;i<Faces1.Count;i++)
         {
             Faces1[i].gameObject.SetActive(false);
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(.1f);
 
         }
         gamegroup.SetActive(true);
@@ -144,7 +152,7 @@ public class MainManager : MonoBehaviour {
         for (int i = 0; i < Faces2.Count; i++)
         {
             Faces2[i].gameObject.SetActive(true);
-            yield return new WaitForSeconds(.3f);
+            yield return new WaitForSeconds(.1f);
 
         }
     }
@@ -154,19 +162,26 @@ public class MainManager : MonoBehaviour {
         if (SceneChoice == 60)
         {
             // game 1
+            //DoFade(2);
             PlayerPrefs.SetString("state", GameState.play.ToString());
 
         } else if(SceneChoice == 70)
         {
             PlayerPrefs.SetString("state", GameState.play.ToString());
             //game2
-            SceneManager.LoadScene(1);
+            StartCoroutine(DoFade(1));
         }
         PlayerPrefs.SetString("tempName", tempTextName);
         PlayerPrefs.SetInt("usecount", UseCount);
     }
 
-    
+    IEnumerator DoFade(int sceneNum)
+    {
+        SceneFader.instance.FadeChoice();
+        yield return new WaitForSeconds(3f);
+
+        SceneManager.LoadScene(sceneNum);
+    }
 
 
     public void PCTesting(RaycastHit rhit)
@@ -181,21 +196,40 @@ public class MainManager : MonoBehaviour {
         }
     }
 
-    public void OnApplicationQuit()
-    {
-        gamestate = GameState.name;
-        PlayerPrefs.SetString("state", gamestate.ToString());
-        UseCount++;
-        PlayerPrefs.SetInt("usecount", UseCount);
-    }
+ 
 
     public void AboutToEndGame(int ChosenFace)
     {
         tempFace2 = ChosenFace;
-        print(tempFace1);
-        print(tempFace2);
+       print(tempFace1);
+       print(tempFace2);
+        string UserInfo;
         PlayerPrefs.SetString("User" + UseCount, tempTextName + tempFace1.ToString() + tempFace2.ToString());
-        print(PlayerPrefs.GetString("User" + UseCount));
+         print(PlayerPrefs.GetString("User" + UseCount));
+        UserInfo = UseCount + "\n"+ tempTextName + "\n" + tempFace1.ToString() + "\n" + tempFace2.ToString() + "\n\n" ;
+        gamestate = GameState.name;
+        PlayerPrefs.SetString("state", gamestate.ToString());
+        PlayerPrefs.SetInt("tempnum1", 0);
+        PlayerPrefs.SetInt("tempnum2", 0);
+        UseCount++;
+        PlayerPrefs.SetInt("usecount", UseCount);
+        PlayerPrefs.Save();
+       
+        DataWriter(UserInfo);
+        inputActive = false;
+        print("info saved");
+    }
+    void DataWriter(string currentUser)
+    {
+        File.AppendAllText(Path.Combine(UnityEngine.Application.persistentDataPath, InfoFileSave), currentUser);
+        
     }
 
+    void OnApplicationQuit()
+    {
+        PlayerPrefs.SetInt("tempnum1", 0);
+        PlayerPrefs.SetInt("tempnum2", 0);
+        gamestate = GameState.name;
+        PlayerPrefs.SetString("state", gamestate.ToString());
+    }
 }

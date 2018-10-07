@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour {
 #elif UNITY_ANDROID
     buildplatform = BuildPlatform.Android;
 #endif
+        if(SceneFader.instance!=null)
+        SceneFader.instance.FadeChoice();
     }
 
 

@@ -29,7 +29,7 @@ public class SmoothMouseLook : MonoBehaviour
     public float frameCounter = 20;
 
     Quaternion originalRotation;
-
+#if UNITY_EDITOR
     void Update()
     {
         if (axes == RotationAxes.MouseXAndY)
@@ -119,7 +119,7 @@ public class SmoothMouseLook : MonoBehaviour
             transform.localRotation = originalRotation * yQuaternion;
         }
     }
-
+#endif
     void Start()
     {
         Rigidbody rb = GetComponent<Rigidbody>();

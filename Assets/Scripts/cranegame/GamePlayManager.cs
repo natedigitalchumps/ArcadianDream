@@ -90,6 +90,14 @@ public class GamePlayManager : MonoBehaviour {
 
     public void GotoMainScene()
     {
+        StartCoroutine(GoingBack());
+    }
+
+
+    IEnumerator GoingBack()
+    {
+        SceneFader.instance.FadeChoice();
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(0);
     }
 }

@@ -27,7 +27,7 @@ public class VRController : MonoBehaviour {
         if (OVRInput.IsControllerConnected(controller))
         {
             touchpoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad, controller);
-            BackButton = OVRInput.Get(OVRInput.Button.Back);
+            BackButton = OVRInput.GetDown(OVRInput.Button.Back);
             TriggerPush = OVRInput.Get(OVRInput.Button.PrimaryIndexTrigger);
             TouchPush = OVRInput.Get(OVRInput.Button.PrimaryTouchpad);
         }
@@ -44,7 +44,7 @@ public class VRController : MonoBehaviour {
         }
         if(BackButton)
         {
-            /// place code here
+            StartCoroutine(GoingBack());
         }
 
         TriggerPull();
@@ -73,5 +73,12 @@ public class VRController : MonoBehaviour {
             GrabberControl.instance.VRCraneLocation(push);
            
         }
+    }
+
+    IEnumerator GoingBack()
+    {
+        SceneFader.instance.FadeChoice();
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(0);
     }
 }
