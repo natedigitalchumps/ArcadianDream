@@ -22,7 +22,7 @@ public class VRController : MonoBehaviour {
     void Update()
     {
        
-        OVRInput.Update();
+      //  OVRInput.Update();
         controller = OVRInput.GetActiveController();
         if (OVRInput.IsControllerConnected(controller))
         {

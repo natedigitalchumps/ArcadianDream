@@ -38,6 +38,10 @@ public class MainManager : MonoBehaviour {
         {
             UseCount = 0;
         }
+        else
+        {
+            UseCount = PlayerPrefs.GetInt("usecount");
+        }
         tempFace1 = PlayerPrefs.GetInt("tempnum1");
         
         if (tempFace1 ==0)
@@ -73,31 +77,27 @@ public class MainManager : MonoBehaviour {
     
     }
 
-    // Use this for initialization
 
-
-    // Update is called once per frame
-    void Update() {
-        OVRInput.Update();
+    void Update()
+    {
+      //  OVRInput.Update();
         RaycastHit hit;
         TriggerPush = OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger);
-        if (Physics.Raycast(head.position,head.forward,out hit,Mathf.Infinity))
+        if (Physics.Raycast(head.position, head.forward, out hit, Mathf.Infinity))
         {
-            if(inputActive)
-                VRController(hit);
+            if (inputActive)
+            {
 #if UNITY_EDITOR
-            PCTesting(hit);
+                PCTesting(hit);
+#else
+                VRController(hit);
 #endif
+            }
         }
-
-        
-
     }
 
     void VRController(RaycastHit rhit)
     {
-        
-
         if(TriggerPush)
         {
             if (rhit.transform.CompareTag("fakeUI") || rhit.transform.CompareTag("game"))
@@ -105,12 +105,23 @@ public class MainManager : MonoBehaviour {
                 WorldObjectInteractor interact = rhit.transform.GetComponent<WorldObjectInteractor>();
                 interact.ClickedOn();
             }
-
         }
-
     }
 
-  public void NextAction(int intValue)
+
+    public void PCTesting(RaycastHit rhit)
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (rhit.transform.CompareTag("fakeUI") || rhit.transform.CompareTag("game"))
+            {
+                WorldObjectInteractor interact = rhit.transform.GetComponent<WorldObjectInteractor>();
+                interact.ClickedOn();
+            }
+        }
+    }
+
+    public void NextAction(int intValue)
     {
         switch(gamestate)
         {
@@ -130,7 +141,6 @@ public class MainManager : MonoBehaviour {
                     Names[i].SetActive(false);
                 }
                 break;
-
         }
     }
 
@@ -181,19 +191,6 @@ public class MainManager : MonoBehaviour {
         yield return new WaitForSeconds(3f);
 
         SceneManager.LoadScene(sceneNum);
-    }
-
-
-    public void PCTesting(RaycastHit rhit)
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (rhit.transform.CompareTag("fakeUI") || rhit.transform.CompareTag("game"))
-            {
-                WorldObjectInteractor interact = rhit.transform.GetComponent<WorldObjectInteractor>();
-                interact.ClickedOn();
-            }
-        }
     }
 
  

@@ -22,7 +22,7 @@ public class VRManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        OVRInput.Update();
+      //  OVRInput.Update();
         controller = OVRInput.GetActiveController();
        float vec2= Vector2.SignedAngle(Vector2.up, touchPoint.normalized);
         controllerInput(vec2);

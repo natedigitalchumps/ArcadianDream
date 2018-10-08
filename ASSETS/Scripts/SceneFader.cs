@@ -43,6 +43,11 @@ public class SceneFader : MonoBehaviour {
 
     public void FadeChoice()
     {
+        Canvas canv = GetComponent<Canvas>();
+        if(canv.worldCamera == null)
+        {
+            canv.worldCamera = Camera.main;
+        }
         switch(currentFadeState)
         {
             case FadeState.fadein:
