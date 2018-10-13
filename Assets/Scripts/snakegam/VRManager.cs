@@ -24,13 +24,18 @@ public class VRManager : MonoBehaviour {
 	void Update () {
       //  OVRInput.Update();
         controller = OVRInput.GetActiveController();
+
+        touchPoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
+
        float vec2= Vector2.SignedAngle(Vector2.up, touchPoint.normalized);
         controllerInput(vec2);
-        debugText.text = "info:" + vec2;
+        debugText.text = "input: " + vec2;
     }
 
     public void controllerInput( float vec2)
     {
 
     }
+
+ 
 }

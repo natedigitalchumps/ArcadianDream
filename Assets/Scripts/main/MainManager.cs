@@ -27,9 +27,10 @@ public class MainManager : MonoBehaviour {
     public Transform head;
     public static MainManager MainMan;
     bool TriggerPush;
-    public enum GameState {name,start,play,end};
+    public enum GameState {name,start,play,end,hmdOff};
     public GameState gamestate;
-
+    // last instructions
+    public GameObject EndingInfoUI;
     private void Awake()
     {
         InfoFileSave = "PlayData.txt";
@@ -49,7 +50,7 @@ public class MainManager : MonoBehaviour {
             PlayerPrefs.SetInt("tempnum1", 0);
             gamestate = GameState.name;
         }
-       // if (PlayerPrefs.GetString("state", "play") == GameState.play.ToString())
+    
        else
         {
             SceneFader.instance.FadeChoice();
@@ -174,6 +175,7 @@ public class MainManager : MonoBehaviour {
             // game 1
             //DoFade(2);
             PlayerPrefs.SetString("state", GameState.play.ToString());
+            StartCoroutine(DoFade(2));
 
         } else if(SceneChoice == 70)
         {
@@ -204,7 +206,6 @@ public class MainManager : MonoBehaviour {
         PlayerPrefs.SetString("User" + UseCount, tempTextName + tempFace1.ToString() + tempFace2.ToString());
          print(PlayerPrefs.GetString("User" + UseCount));
         UserInfo = UseCount + "\n"+ tempTextName + "\n" + tempFace1.ToString() + "\n" + tempFace2.ToString() + "\n\n" ;
-        gamestate = GameState.name;
         PlayerPrefs.SetString("state", gamestate.ToString());
         PlayerPrefs.SetInt("tempnum1", 0);
         PlayerPrefs.SetInt("tempnum2", 0);
@@ -215,6 +216,21 @@ public class MainManager : MonoBehaviour {
         DataWriter(UserInfo);
         inputActive = false;
         print("info saved");
+        gamestate = GameState.hmdOff;
+        StartCoroutine(LastPart());
+    }
+
+    IEnumerator LastPart()
+    {
+        for (int i = 0; i < Faces2.Count; i++)
+        {
+            yield return new WaitForSeconds(.05f);
+            Faces2[i].gameObject.SetActive(false);
+        }
+        yield return new WaitForSeconds(1f);
+        EndingInfoUI.SetActive(true);
+        gamestate = GameState.name;
+
     }
     void DataWriter(string currentUser)
     {

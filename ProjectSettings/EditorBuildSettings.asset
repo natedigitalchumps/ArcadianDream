@@ -11,3 +11,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CraneScene.unity
     guid: d1e013db88f01ac4b820d676348cea1f
+  - enabled: 1
+    path: Assets/Scenes/SnakeScene.unity
+    guid: 44fd78daf29d3794da7cc75bf872e4dd
