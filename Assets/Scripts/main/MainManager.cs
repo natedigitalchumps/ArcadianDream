@@ -174,8 +174,8 @@ public class MainManager : MonoBehaviour {
         {
             // game 1
             //DoFade(2);
-            PlayerPrefs.SetString("state", GameState.play.ToString());
-            StartCoroutine(DoFade(2));
+      //      PlayerPrefs.SetString("state", GameState.play.ToString());
+        //    StartCoroutine(DoFade(2));
 
         } else if(SceneChoice == 70)
         {
