@@ -11,10 +11,19 @@ public class Snake : MonoBehaviour {
     List<Transform> tail = new List<Transform>();
     // Did the snake eat something?
     bool ate = false;
-
+    public static Snake instance;
     // Tail Prefab
     public GameObject tailPrefab;
     // Use this for initialization
+    public enum snakeDirection { up,down,left,right,stop};
+    public snakeDirection SnakeMovementDirection;
+    public bool DirectionChanged = false;
+
+    void Awake()
+    {
+        instance = this;
+        SnakeMovementDirection = snakeDirection.right;
+    }
     void Start()
     {
         // Move the Snake every 300ms
@@ -24,6 +33,8 @@ public class Snake : MonoBehaviour {
     // Update is called once per frame
   public  void Update()
     {
+#if UNITY_EDITOR_WIN
+
         if (Input.GetKey(KeyCode.RightArrow))
             dir = Vector2.right;
         else if (Input.GetKey(KeyCode.DownArrow))
@@ -32,6 +43,28 @@ public class Snake : MonoBehaviour {
             dir = -Vector2.right; // '-right' means 'left'
         else if (Input.GetKey(KeyCode.UpArrow))
             dir = Vector2.up;
+#else
+           switch (SnakeMovementDirection)
+        {
+            case snakeDirection.right:
+                dir = Vector2.right;
+                break;
+            case snakeDirection.left:
+                dir = -Vector2.right;
+                break;
+            case snakeDirection.up:
+                dir = Vector2.up;
+                break;
+            case snakeDirection.down:
+                dir = -Vector2.up;
+                break;
+        }
+        DirectionChanged = false;
+
+
+#endif
+
+
     }
 
     void Move()
@@ -80,7 +113,14 @@ public class Snake : MonoBehaviour {
         // Collided with Tail or Border
         else
         {
-            print("they hit the wall");
+            SnakeMovementDirection = snakeDirection.stop;
+            StartCoroutine(SnakeGameOver());
         }
+    }
+
+    IEnumerator SnakeGameOver()
+    {
+        yield return new WaitForSeconds(5f);
+        SnakeGameManager.manager.ChangeScene();
     }
 }

@@ -466,6 +466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tailPrefab: {fileID: 1138721226672850, guid: c754b54eb4619b443b3140fc854fb8ef, type: 2}
+  SnakeMovementDirection: 0
+  DirectionChanged: 0
 --- !u!61 &282521729
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1185,7 +1187,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 852843448}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: -0.000000029802322}
-  m_LocalPosition: {x: -0.12, y: -1.6921012, z: -7.7}
+  m_LocalPosition: {x: -0.12, y: -1.6921012, z: -7.28}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1922417567}
@@ -1553,6 +1555,7 @@ GameObject:
   - component: {fileID: 1125306217}
   - component: {fileID: 1125306218}
   - component: {fileID: 1125306219}
+  - component: {fileID: 1125306220}
   m_Layer: 0
   m_Name: manager
   m_TagString: Untagged
@@ -1602,6 +1605,17 @@ MonoBehaviour:
   borderBottom: {fileID: 864135393}
   borderLeft: {fileID: 2058642487}
   borderRight: {fileID: 1424003809}
+--- !u!114 &1125306220
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1125306216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68652cbd19b5fb14fbd0cf261630d43e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1165180253
 GameObject:
   m_ObjectHideFlags: 0
