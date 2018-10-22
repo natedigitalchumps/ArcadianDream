@@ -12,7 +12,7 @@ public class VRManager : MonoBehaviour {
     public static VRManager instance;
     public Text debugText;
     bool backbutton = false;
-
+    
     private void Awake()
     {
         instance = this;
@@ -42,7 +42,7 @@ public class VRManager : MonoBehaviour {
             touchPoint = OVRInput.Get(OVRInput.Axis2D.PrimaryTouchpad);
             float TouchAngle = Vector2.SignedAngle(Vector2.up, touchPoint.normalized);
             controllerInput(TouchAngle);
-            debugText.text = "input: " + TouchAngle;
+       //     debugText.text = "input: " + TouchAngle;
         }
     }
 
@@ -75,4 +75,7 @@ public class VRManager : MonoBehaviour {
         }
     }
  
+
+
+
 }

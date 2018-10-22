@@ -10,6 +10,7 @@ TagManager:
   - fakeUI
   - game
   - badhitobj
+  - snakefood
   layers:
   - Default
   - TransparentFX

@@ -67,10 +67,7 @@ public class GamePlayManager : MonoBehaviour {
         GameTimer();
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
+
 	
 	// Update is called once per frame
 	void Update () {
