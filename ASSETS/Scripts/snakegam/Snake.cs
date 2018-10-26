@@ -49,7 +49,7 @@ public class Snake : MonoBehaviour {
           switch (SnakeMovementDirection)
         {
             case snakeDirection.right:
-                if(dir!=-Vector2.left)
+                if(dir!=-Vector2.right)
                 {
                     dir = Vector2.right;
                 }
