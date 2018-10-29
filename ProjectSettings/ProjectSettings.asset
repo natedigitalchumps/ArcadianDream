@@ -126,7 +126,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: .08
+  bundleVersion: 1.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -159,6 +159,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Android: com.UK.arcade
+    Metro: com.oculus.UnitySample
     Standalone: com.oculus.UnitySample
     tvOS: com.oculus.UnitySample
   buildNumber: {}
@@ -284,6 +285,10 @@ PlayerSettings:
   - m_BuildTarget: tvOS
     m_Enabled: 1
     m_Devices: []
+  - m_BuildTarget: Metro
+    m_Enabled: 1
+    m_Devices:
+    - WindowsMR
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
