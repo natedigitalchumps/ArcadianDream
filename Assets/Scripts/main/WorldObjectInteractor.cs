@@ -69,7 +69,7 @@ public class WorldObjectInteractor : MonoBehaviour {
                 break;
             case 4:
                 MainManager.MainMan.AboutToEndGame(label);
-            //    print("clickedon");
+                VoiceOverControl.instant.CurrentClip++;
                 break;
         }
 

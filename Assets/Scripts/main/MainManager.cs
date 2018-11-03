@@ -8,6 +8,7 @@ using System.IO;
 
 public class MainManager : MonoBehaviour {
 
+    
     public List<GameObject> Faces1 = new List<GameObject>();
     public List<GameObject> Faces2 = new List<GameObject>();
     public List<GameObject> Names = new List<GameObject>();
@@ -33,6 +34,7 @@ public class MainManager : MonoBehaviour {
     public GameObject EndingInfoUI;
     private void Awake()
     {
+        MainMan = this;
         InfoFileSave = "PlayData.txt";
      //   
         if (!PlayerPrefs.HasKey("usecount"))
@@ -49,6 +51,7 @@ public class MainManager : MonoBehaviour {
         {
             PlayerPrefs.SetInt("tempnum1", 0);
             gamestate = GameState.name;
+            StartCoroutine(QuickAudioPart());
         }
     
        else
@@ -65,7 +68,7 @@ public class MainManager : MonoBehaviour {
             NextAction(tempFace1);
         } 
 
-        MainMan = this;
+      
 
         for(int i=0;i<Faces1.Count;i++)
         {
@@ -78,6 +81,12 @@ public class MainManager : MonoBehaviour {
     
     }
 
+    IEnumerator QuickAudioPart()
+    {
+        yield return new WaitForSeconds(2f);
+        VoiceOverControl.instant.PlayTheRightAudio();
+        VoiceOverControl.instant.CurrentClip++;
+    }
 
     void Update()
     {
@@ -131,12 +140,19 @@ public class MainManager : MonoBehaviour {
                 print("going to playerprefs "+ tempFace1);
                 PlayerPrefs.SetInt("tempnum1",tempFace1);
                 StartCoroutine(TurnOffFaces());
+                VoiceOverControl.instant.PlayTheRightAudio();
+                
                 break;
             case GameState.end:
                 StartCoroutine(TurnOnFaces());
+                VoiceOverControl.instant.CurrentClip++;
+                VoiceOverControl.instant.PlayTheRightAudio();
+                
                 break;
             case GameState.start:
                 FaceGroup1.SetActive(true);
+                VoiceOverControl.instant.PlayTheRightAudio();
+                VoiceOverControl.instant.CurrentClip++;
                 for (int i = 0; i < Names.Count; i++)
                 {
                     Names[i].SetActive(false);
@@ -158,13 +174,11 @@ public class MainManager : MonoBehaviour {
 
     public IEnumerator TurnOnFaces()
     {
-
         gamegroup.SetActive(false);
         for (int i = 0; i < Faces2.Count; i++)
         {
             Faces2[i].gameObject.SetActive(true);
             yield return new WaitForSeconds(.1f);
-
         }
     }
 
@@ -172,15 +186,12 @@ public class MainManager : MonoBehaviour {
     {
         if (SceneChoice == 60)
         {
-            // game 1
-            //DoFade(2);
-            PlayerPrefs.SetString("state", GameState.play.ToString());
+           PlayerPrefs.SetString("state", GameState.play.ToString());
            StartCoroutine(DoFade(2));
 
         } else if(SceneChoice == 70)
         {
             PlayerPrefs.SetString("state", GameState.play.ToString());
-            //game2
             StartCoroutine(DoFade(1));
         }
         PlayerPrefs.SetString("tempName", tempTextName);
@@ -229,9 +240,19 @@ public class MainManager : MonoBehaviour {
         }
         yield return new WaitForSeconds(1f);
         EndingInfoUI.SetActive(true);
+        VoiceOverControl.instant.PlayTheRightAudio();
+        VoiceOverControl.instant.CurrentClip++;
+        
         gamestate = GameState.name;
+        StartCoroutine(LastAudioPart());
 
     }
+    IEnumerator LastAudioPart()
+    {
+        yield return new WaitForSeconds(2f);
+        VoiceOverControl.instant.PlayTheRightAudio();
+    }
+
     void DataWriter(string currentUser)
     {
         File.AppendAllText(Path.Combine(UnityEngine.Application.persistentDataPath, InfoFileSave), currentUser);
