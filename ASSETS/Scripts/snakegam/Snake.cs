@@ -18,11 +18,12 @@ public class Snake : MonoBehaviour {
     public enum snakeDirection { up,down,left,right,stop};
     public snakeDirection SnakeMovementDirection;
     public bool DirectionChanged = false;
-
+    AudioSource asource;
     void Awake()
     {
         instance = this;
         SnakeMovementDirection = snakeDirection.right;
+        asource = GetComponent<AudioSource>();
     }
     void Start()
     {
@@ -100,7 +101,7 @@ public class Snake : MonoBehaviour {
                 GameObject g = Instantiate(tailPrefab, v, Quaternion.identity);
                 Vector3 vec = new Vector3(v.x, v.y, transform.position.z);
                 g.transform.position = vec;
-
+                
                 // Keep track of it in our tail list
                 tail.Insert(0, g.transform);
 
@@ -126,6 +127,7 @@ public class Snake : MonoBehaviour {
         // Food?
         if (coll.CompareTag("snakefood"))
         {
+            asource.Play();
             // Get longer in next Move call
             ate = true;
             UIControl.instant.ScoreInc();
